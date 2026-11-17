@@ -1529,7 +1529,7 @@ bom {
 		}
 	}
 	library("Spring Boot", "${version}") {
-		group("org.springframework.boot") {
+		group(project.rootProject.ext.ltsGroupId) {
 			modules = [
 				"spring-boot",
 				"spring-boot-test",
@@ -1760,7 +1760,8 @@ bom {
 			versionRange "[6.0.0-M1,)"
 			because "we upgrade in Spring Boot 3.x"
 		}
-		group("org.springframework") {
+		// ltsboot: -PltsFrameworkGroupId overrides the groupId of the Framework BOM (default: original)
+		group(project.findProperty("ltsFrameworkGroupId") ?: "org.springframework") {
 			imports = [
 				"spring-framework-bom"
 			]
@@ -1850,7 +1851,8 @@ bom {
 			versionRange "[6.0.0-M1,)"
 			because "it uses Spring Framework 6"
 		}
-		group("org.springframework.security") {
+		// ltsboot: -PltsSecurityGroupId overrides the groupId of the Security BOM (default: original)
+		group(project.findProperty("ltsSecurityGroupId") ?: "org.springframework.security") {
 			imports = [
 				"spring-security-bom"
 			]

@@ -24,8 +24,11 @@ check {
 	dependsOn checkstyleNohttp
 }
 
+// ltsboot: published groupId, overridable with -PltsGroupId=<x> (default: the original groupId, for internal Nexus)
+ext.ltsGroupId = project.findProperty("ltsGroupId") ?: "org.springframework.boot"
+
 allprojects {
-	group "org.springframework.boot"
+	group rootProject.ext.ltsGroupId
 
 	repositories {
 		mavenCentral()
